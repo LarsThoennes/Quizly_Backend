@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework_simplejwt',
 
-    'auth_app'
+    'auth_app',
+    'quiz_app',
 ]
 
 MIDDLEWARE = [
