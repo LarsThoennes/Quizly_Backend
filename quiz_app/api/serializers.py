@@ -19,12 +19,19 @@ class QuizCreateSerializer(serializers.ModelSerializer):
             video_url=video_url,
             video_id=info["id"],
             title="",
-            description=""
+            description="",
+            creator=self.context["request"].user
         )
 
         audio_path = download_audio(video_url, quiz.video_id)
         transcript = transcribe_audio(audio_path)
         prompt = load_prompt("quiz_questions.txt", TRANSCRIPT=transcript)
+
+        # # For local testing with a static transcript file
+        # transcript_path = Path(__file__).resolve().parent.parent / "transcript" / "transcript.txt"
+        # transcript = transcript_path.read_text(encoding="utf-8")
+
+        prompt = load_prompt("quiz_questions.txt", TRANSCRIPT=transcript) 
         gemini_response = generate_gemini_response(prompt)
         data = parse_gemini_json(gemini_response)
         quiz.title = data["title"]
