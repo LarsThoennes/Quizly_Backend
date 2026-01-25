@@ -8,6 +8,16 @@ from ..helper.gemini_parser import parse_gemini_json
 from pathlib import Path
 
 class QuizCreateSerializer(serializers.ModelSerializer):
+    """
+    Serializer for creating a quiz from a YouTube URL.
+
+    - Accepts a YouTube video URL as input
+    - Extracts video information and downloads audio
+    - Transcribes audio using Whisper
+    - Generates quiz questions using AI (Gemini)
+    - Creates Quiz, QuizQuestion, and QuizOption objects
+    - Assigns the authenticated user as the quiz creator
+    """
     url = serializers.CharField(write_only=True)
     class Meta:
         model = Quiz
@@ -55,11 +65,24 @@ class QuizCreateSerializer(serializers.ModelSerializer):
         return quiz
 
 class QuizOptionSerializer(serializers.ModelSerializer):
+    """
+    Serializer for quiz answer options.
+
+    - Serializes individual answer options
+    - Returns only the option text field
+    """
     class Meta:
         model = QuizOption
         fields = ["text"]
 
 class QuizQuestionSerializer(serializers.ModelSerializer):
+    """
+    Serializer for quiz questions.
+
+    - Serializes quiz questions with their answer options
+    - Supports dynamic removal of timestamp fields via context
+    - Returns question text, options, and the correct answer
+    """
     question_options = serializers.SerializerMethodField()
     class Meta:
         model = QuizQuestion
@@ -85,6 +108,13 @@ class QuizQuestionSerializer(serializers.ModelSerializer):
         return [opt.text for opt in obj.question_options.all()]
 
 class QuizDetailSerializer(serializers.ModelSerializer):
+    """
+    Serializer for detailed quiz representation.
+
+    - Serializes a quiz with all related questions
+    - Uses a nested serializer for quiz questions
+    - Supports context-based field customization
+    """
     questions = serializers.SerializerMethodField()
     class Meta:
         model = Quiz
@@ -107,7 +137,13 @@ class QuizDetailSerializer(serializers.ModelSerializer):
         return serializer.data
     
 class QuizUpdateSerializer(serializers.ModelSerializer):
+    """
+    Serializer for updating an existing quiz.
 
+    - Allows partial updates of the quiz title
+    - Validates and saves updated quiz data
+    - Returns the updated quiz instance
+    """
     class Meta:
             model = Quiz
             fields = [

@@ -8,6 +8,13 @@ from django.shortcuts import get_object_or_404
 from rest_framework.exceptions import PermissionDenied
 
 class CreateQuizView(APIView):
+    """
+    Creates a new quiz from a YouTube URL.
+
+    - Requires authentication
+    - Uses QuizCreateSerializer to generate a quiz from video content
+    - Returns the created quiz with all related questions
+    """
     permission_classes = [IsAuthenticated]
 
     def post(self, request):
@@ -21,6 +28,13 @@ class CreateQuizView(APIView):
         )
     
 class QuizListView(APIView):
+    """
+    Retrieves all quizzes created by the authenticated user.
+
+    - Requires authentication
+    - Returns a list of quizzes belonging to the current user
+    - Omits timestamp fields from nested questions
+    """
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
@@ -34,6 +48,14 @@ class QuizListView(APIView):
         )
     
 class QuizDetailView(APIView):
+    """
+    Retrieves, updates, or deletes a specific quiz by its ID.
+
+    - Requires authentication
+    - Returns 404 if the quiz does not exist
+    - Returns 403 if the quiz does not belong to the user
+    - Supports GET, PATCH, and DELETE methods
+    """
     permission_classes = [IsAuthenticated]
     
     def get(self, request, pk):
