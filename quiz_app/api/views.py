@@ -8,7 +8,7 @@ class CreateQuizView(APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request):
-        serializer = QuizCreateSerializer(data=request.data)
+        serializer = QuizCreateSerializer(data=request.data, context={"request": request})
         serializer.is_valid(raise_exception=True)
         quiz = serializer.save()
 
