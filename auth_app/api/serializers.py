@@ -8,6 +8,14 @@ from rest_framework.exceptions import AuthenticationFailed
 User = get_user_model()
 
 class RegistrationSerializer(serializers.ModelSerializer):
+    """
+    Serializer for user registration.
+
+    - Validates user input including repeated password confirmation
+    - Ensures email uniqueness
+    - Hashes and stores the user password securely
+    - Creates and returns a new user account
+    """
     repeated_password = serializers.CharField(write_only=True)
 
     class Meta:
@@ -42,6 +50,14 @@ class RegistrationSerializer(serializers.ModelSerializer):
         return account
 
 class CustomTokenObtainSerializer(TokenObtainPairSerializer):
+    """
+    Custom serializer for user authentication and JWT token generation.
+
+    - Validates username and password credentials
+    - Raises authentication errors for invalid login attempts
+    - Generates access and refresh tokens using JWT
+    - Returns token data upon successful authentication
+    """
     username = serializers.CharField(write_only=True)
     password = serializers.CharField(write_only=True)
 

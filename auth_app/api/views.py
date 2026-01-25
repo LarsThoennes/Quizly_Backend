@@ -6,6 +6,13 @@ from .serializers import RegistrationSerializer, CustomTokenObtainSerializer
 from rest_framework import status
 
 class RegistrationView(APIView):
+    """
+    Handles user registration by creating a new user account.
+
+    - Public endpoint (no authentication required)
+    - Validates input data using RegistrationSerializer
+    - Creates a new user and returns a success message
+    """
     permission_classes = [AllowAny]
 
     def post(self, request):
@@ -24,6 +31,14 @@ class RegistrationView(APIView):
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class CookieTokenObtainView(TokenObtainPairView):
+    """
+    Authenticates a user and issues JWT access and refresh tokens.
+
+    - Public endpoint (no authentication required)
+    - Generates access and refresh tokens using JWT
+    - Stores tokens securely in HTTP-only cookies
+    - Returns user information after successful login
+    """
     permission_classes = [AllowAny]
     serializer_class = CustomTokenObtainSerializer
 
@@ -67,6 +82,13 @@ class CookieTokenObtainView(TokenObtainPairView):
         return response
 
 class LogoutView(APIView):
+    """
+    Logs out the authenticated user by deleting JWT tokens from cookies.
+
+    - Requires authentication
+    - Removes access and refresh tokens from the client
+    - Invalidates the session on the client side
+    """
     permission_classes = [IsAuthenticated]
 
     def post(self, request):
@@ -88,6 +110,13 @@ class LogoutView(APIView):
         return response
 
 class CookieRefreshView(TokenRefreshView):
+    """
+    Refreshes the JWT access token using the refresh token stored in cookies.
+
+    - Reads refresh token from HTTP-only cookies
+    - Issues a new access token if the refresh token is valid
+    - Returns an error if the refresh token is missing or invalid
+    """
     def post(self, request, *args, **kwargs):
         refresh_token = request.COOKIES.get('refresh_token')
 
