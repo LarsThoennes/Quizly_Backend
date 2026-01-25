@@ -1,7 +1,6 @@
 import yt_dlp
 import os
 
-
 def extract_youtube_info(url: str) -> dict:
     ydl_opts = {
         "quiet": True,
