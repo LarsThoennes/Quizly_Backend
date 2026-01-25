@@ -105,3 +105,16 @@ class QuizDetailSerializer(serializers.ModelSerializer):
             context=self.context
         )
         return serializer.data
+    
+class QuizUpdateSerializer(serializers.ModelSerializer):
+
+    class Meta:
+            model = Quiz
+            fields = [
+                "title",
+            ]
+
+    def update(self, instance, validated_data):
+        instance.title = validated_data.get("title", instance.title)
+        instance.save()
+        return instance
