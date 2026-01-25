@@ -25,13 +25,13 @@ class QuizCreateSerializer(serializers.ModelSerializer):
         )
 
         # For production use with actual transcription
-        # audio_path = download_audio(video_url, quiz.video_id)
-        # transcript = transcribe_audio(audio_path)
-        # prompt = load_prompt("quiz_questions.txt", TRANSCRIPT=transcript)
+        audio_path = download_audio(video_url, quiz.video_id)
+        transcript = transcribe_audio(audio_path)
+        prompt = load_prompt("quiz_questions.txt", TRANSCRIPT=transcript)
 
-        # # For local testing with a static transcript file
-        transcript_path = Path(__file__).resolve().parent.parent / "transcript" / "transcript.txt"
-        transcript = transcript_path.read_text(encoding="utf-8")
+        # For local testing with a static transcript file
+        # transcript_path = Path(__file__).resolve().parent.parent / "transcript" / "transcript.txt"
+        # transcript = transcript_path.read_text(encoding="utf-8")
 
         prompt = load_prompt("quiz_questions.txt", TRANSCRIPT=transcript) 
         gemini_response = generate_gemini_response(prompt)
