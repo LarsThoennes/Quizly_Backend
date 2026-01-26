@@ -6,12 +6,16 @@ It allows users to generate quizzes automatically from YouTube videos using AI-p
 ---
 
 ## Technologies
-- **Python**
-- **Django**
-- **Django REST Framework**
-- **JWT Authentication (Access & Refresh Tokens)**
-- **AI Services (Whisper & Gemini)**
-- **yt-dlp**
+- **Python 3.11+**
+- **Django 5.2.10**
+- **Django REST Framework 3.16.1**
+- **Simple JWT 5.5.1 (JWT Authentication with Access & Refresh Tokens)**
+- **Google Gemini API (google-genai 1.59.0)**
+- **OpenAI Whisper 20250625 (audio transcription)**
+- **yt-dlp 2025.12.8 (YouTube audio extraction)**
+- **PyTorch 2.10.0 (AI model runtime)**
+- **python-dotenv 1.2.1 (environment variable management)**
+- **django-cors-headers 4.9.0 (CORS handling)**
 
 ---
 
@@ -34,45 +38,45 @@ It allows users to generate quizzes automatically from YouTube videos using AI-p
 git clone https://github.com/LarsThoennes/Quizly_Backend
 cd Quizly_Backend
 ```
-### Create a virtual environment
+### 2. Create a virtual environment
 ```bash
 python -m venv venv
 ```
-### Activate the environment
+### 3. Activate the environment
 
-#### macOS/Linux
+#### 3.1 macOS/Linux
 ```bash
 source venv/bin/activate
 ```
-#### Windows
+#### 3.2 Windows
 ```bash
 venv\Scripts\activate
 ```
-### Install dependencies
+### 4. Install dependencies
 ```bash
 pip install -r requirements.txt
 ```
-### Create migrations
+### 5. Create migrations
 ```bash
 python manage.py makemigrations
 ```
-### Apply migrations
+### 6. Apply migrations
 ```bash
 python manage.py migrate
 ```
-### (Optional) Create a superuser for the admin panel
+### 7. (Optional) Create a superuser for the admin panel
 ```bash
 python manage.py createsuperuser
 ```
-### Run the Development Server
+### 8. Run the Development Server
 ```bash
 python manage.py runserver
 ```
-### The server will start at:
+### 9. The server will start at:
 ```bash
 http://127.0.0.1:8000/
 ```
-### Create a .env file in the project root and define the following variables:
+### 10. Create a .env file in the project root and define the following variables:
 ```env
 GEMINI_API_KEY=your_gemini_api_key
 ```
