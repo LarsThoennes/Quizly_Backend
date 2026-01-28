@@ -44,15 +44,15 @@ python -m venv venv
 ```
 ### 3. Activate the environment
 
-&nbsp;&nbsp; 3.1 macOS / Linux
-&nbsp;&nbsp;```bash
-&nbsp;&nbsp;source venv/bin/activate
-&nbsp;&nbsp;```
+#### 3.1 macOS / Linux
+```bash
+source venv/bin/activate
+```
 
-&nbsp;&nbsp; 3.2 Windows
-&nbsp;&nbsp;```bash
-&nbsp;&nbsp;venv\Scripts\activate
-&nbsp;&nbsp;```
+#### 3.2 Windows
+```bash
+venv\Scripts\activate
+```
 
 ### 4. Install dependencies
 ```bash
