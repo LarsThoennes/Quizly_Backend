@@ -44,14 +44,16 @@ python -m venv venv
 ```
 ### 3. Activate the environment
 
-#### 3.1 macOS/Linux
-```bash
-source venv/bin/activate
-```
-#### 3.2 Windows
-```bash
-venv\Scripts\activate
-```
+&nbsp;&nbsp; 3.1 macOS / Linux
+&nbsp;&nbsp;```bash
+&nbsp;&nbsp;source venv/bin/activate
+&nbsp;&nbsp;```
+
+&nbsp;&nbsp; 3.2 Windows
+&nbsp;&nbsp;```bash
+&nbsp;&nbsp;venv\Scripts\activate
+&nbsp;&nbsp;```
+
 ### 4. Install dependencies
 ```bash
 pip install -r requirements.txt
@@ -76,7 +78,20 @@ python manage.py runserver
 ```bash
 http://127.0.0.1:8000/
 ```
-### 10. Create a .env file in the project root and define the following variables:
+### 10. Create your `.env` file
+
+A template file `.env.template` is provided in the project root with example values for development.
+
+Copy the template file and rename it to `.env`:
+
+Then update the values in the .env file with your own configuration:
 ```env
-GEMINI_API_KEY=your_gemini_api_key
+DEBUG=True
+CORS_ALLOW_CREDENTIALS=True
+CORS_ALLOWED_ORIGINS=http://localhost:5500,http://127.0.0.1:5500
+CSRF_TRUSTED_ORIGINS=http://localhost:5500,http://127.0.0.1:5500
+ALLOWED_HOSTS=localhost,127.0.0.1
+SECRET_KEY=your_secret_key_here
+GEMINI_API_KEY=your_gemini_api_key_here
 ```
+
