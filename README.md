@@ -48,37 +48,15 @@ python -m venv venv
 ```bash
 source venv/bin/activate
 ```
-
 #### 3.2 Windows
 ```bash
 venv\Scripts\activate
 ```
-
 ### 4. Install dependencies
 ```bash
 pip install -r requirements.txt
 ```
-### 5. Create migrations
-```bash
-python manage.py makemigrations
-```
-### 6. Apply migrations
-```bash
-python manage.py migrate
-```
-### 7. (Optional) Create a superuser for the admin panel
-```bash
-python manage.py createsuperuser
-```
-### 8. Run the Development Server
-```bash
-python manage.py runserver
-```
-### 9. The server will start at:
-```bash
-http://127.0.0.1:8000/
-```
-### 10. Create your `.env` file
+### 5. Create your `.env` file
 
 A template file `.env.template` is provided in the project root with example values for development.
 
@@ -93,5 +71,25 @@ CSRF_TRUSTED_ORIGINS=http://localhost:5500,http://127.0.0.1:5500
 ALLOWED_HOSTS=localhost,127.0.0.1
 SECRET_KEY=your_secret_key_here
 GEMINI_API_KEY=your_gemini_api_key_here
+```
+### 6. Create migrations
+```bash
+python manage.py makemigrations
+```
+### 7. Apply migrations
+```bash
+python manage.py migrate
+```
+### 8. (Optional) Create a superuser for the admin panel
+```bash
+python manage.py createsuperuser
+```
+### 9. Run the Development Server
+```bash
+python manage.py runserver
+```
+### 10. The server will start at:
+```bash
+http://127.0.0.1:8000/
 ```
 
